@@ -1,6 +1,6 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,get_object_or_404
 from . models import Task
-from . forms import TodoForm
+
 # Create your views here.
 def add(request):
     task1 = Task.objects.all()
@@ -23,10 +23,18 @@ def delete(request,taskid):
        return redirect('/')
     return render(request,'delete.html')
 
-def update(request,id):
-    task=Task.objects.get(id=id)
-    f=TodoForm(request.POST or None, instance=task)
-    if f.is_valid():
-        f.save()
+
+def update(request, taskid):
+    task = Task.objects.get(id=taskid)
+
+    if request.method == 'POST':
+        sl_no = request.POST.get('sl_no')
+        item_name = request.POST.get('item_name')
+        description = request.POST.get('description')
+        
+        task.sl_no = sl_no
+        task.item_name = item_name
+        task.description = description
+        task.save()
         return redirect('/')
-    return render(request,'edit.html',{'f':f,'task':task})
+    return render(request, 'edit.html', {'task': task})

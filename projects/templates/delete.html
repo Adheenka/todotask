@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <p style="background: transparent;
+    border: 0;
+    text-align: center;
+    color: #444242;
+    font-size: 30px;
+    padding: 20px;
+    height: 30px;
+    line-height: 30px;
+    outline: none !important;
+    width: 100%;">Are you sure this task is delete?</p>
+    <div style="position:center; text-align: center;"class="center">
+    <button style="position: center; text-align: center;" class="btn btn-danger"  type="submit">confirm</button>
+</div>
+</form>
+
+
+
+{% endblock %}
